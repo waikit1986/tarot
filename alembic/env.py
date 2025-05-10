@@ -5,8 +5,17 @@ from sqlalchemy import pool
 
 from alembic import context
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from database import Base
 from profile.models_profile import Profile
+
+import os
+DATABASE_URL = os.getenv("SQL_URL")
+config = context.config
+config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))
+
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
